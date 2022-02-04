@@ -1,4 +1,4 @@
-use std::num::NonZeroU32;
+
 use std::time::{Duration, SystemTime};
 
 use tokio::sync::mpsc::Receiver;
@@ -21,7 +21,7 @@ pub async fn init(mut events: Receiver<Message>) -> anyhow::Result<()> {
     )?;
     tracing::info!("waiting for handshake...");
     user.0.changed().await?;
-    let user = match &*user.0.borrow() {
+    let _user = match &*user.0.borrow() {
         UserState::Connected(user) => {
             tracing::info!(user = ?user, "connected to discord");
             user
@@ -72,7 +72,7 @@ pub async fn init(mut events: Receiver<Message>) -> anyhow::Result<()> {
                     tokio::time::sleep(Duration::from_secs(2)).await;
                 }
             }
-            _ => panic!("unhandled"),
+
         }
     }
     Ok(())

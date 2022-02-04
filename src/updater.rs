@@ -1,7 +1,6 @@
 use crate::message::Message;
 use crate::util::{self, get_bat_usage};
 use std::time::Duration;
-use sysinfo::{ProcessorExt, System, SystemExt};
 use tokio::process::Command;
 use tokio::sync::mpsc::Sender;
 use tokio::time;

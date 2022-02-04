@@ -1,0 +1,16 @@
+[package]
+name = "system-rpc"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.53"
+discord-sdk = "0.2.1"
+notify = "4.0.17"
+sysinfo = "0.23.0"
+tokio = { version = "1.16.1", features = ["full"] }
+tracing = "0.1.30"
+tracing-subscriber = "0.3.7"
+yansi = "0.5.0"

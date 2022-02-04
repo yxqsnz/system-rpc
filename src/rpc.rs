@@ -61,6 +61,10 @@ pub async fn init(mut events: Receiver<Message>) -> anyhow::Result<()> {
                                 String::from("debian"),
                                 Some(String::from("The most stable system"))
                             ),
+                            Distro::NixOS => Assets::default().large(
+                                 String::from("nix"),
+                                 Some(String::from("Operating System for Chads"))
+                            ),
                             _ => Assets::default(),
                         })
                         .start_timestamp(SystemTime::now());

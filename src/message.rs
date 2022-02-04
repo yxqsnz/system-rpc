@@ -2,6 +2,7 @@
 pub enum Distro {
     Arch,
     Debian,
+    NixOS,
     Unknown,
 }
 impl From<String> for Distro {
@@ -17,6 +18,7 @@ impl From<String> for Distro {
             "arch" => Self::Arch,
             "archlinux" => Self::Arch,
             "debian" => Self::Debian,
+            "nixos" => Self::NixOS,
             distro => {
                 tracing::warn!("found a unknown distro: {distro}");
                 Self::Unknown

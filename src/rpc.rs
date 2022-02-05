@@ -4,6 +4,7 @@ use std::time::{Duration, SystemTime};
 use tokio::sync::mpsc::Receiver;
 
 use crate::message::{Distro, Message};
+use crate::util::get_sys_uptime;
 use discord::activity::{ActivityBuilder, Assets};
 use discord::wheel::{UserState, Wheel};
 use discord::Discord;
@@ -67,7 +68,7 @@ pub async fn init(mut events: Receiver<Message>) -> anyhow::Result<()> {
                             ),
                             _ => Assets::default(),
                         })
-                        .start_timestamp(SystemTime::now());
+                        .start_timestamp(get_sys_uptime().await?);
                     client.update_activity(acty).await?;
                     tokio::time::sleep(Duration::from_secs(2)).await;
                 }

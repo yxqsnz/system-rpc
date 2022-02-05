@@ -1,5 +1,10 @@
+use std::time::{SystemTime, Duration};
+
+use tokio::process::Command;
+
 use anyhow::Result;
 
+use chrono::DateTime;
 use tokio::{fs::File, io::AsyncReadExt};
 
 use crate::message::Distro;
@@ -24,3 +29,13 @@ pub async fn get_bat_usage() -> Result<u8> {
     f.read_to_string(&mut buf).await?;
     Ok(buf.trim().parse()?)
 }
+pub async fn get_sys_uptime() -> Result<i64> {
+   let spawn = Command::new("uptime").arg("-s").output().await?.stdout;
+   let mut out = String::from_utf8(spawn)?;
+   tracing::debug!(uptime = ?out.trim(), "fetch uptime done.");
+   out.push_str(" +0000");
+   let parsed = DateTime::parse_from_str(out.trim(), "%Y-%m-%d %H:%M:%S %z")?;
+
+
+   Ok(parsed.timestamp())
+} 

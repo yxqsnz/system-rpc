@@ -17,7 +17,7 @@ async fn main() -> Result<()> {
     setup();
     tracing::info!("starting...");
     let (sender, rec) = mpsc::channel(BUFFER_SIZE);
-    tokio::spawn(rpc::init(rec));
-    updater::init(sender).await?;
+    tokio::spawn(updater::init(sender));
+    rpc::init(rec).await?;
     Ok(())
 }
